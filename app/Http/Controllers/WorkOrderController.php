@@ -11,9 +11,17 @@ class WorkOrderController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $workOrder = WorkOrder::latest()->paginate(5);
+        $query = WorkOrder::query();
+
+        if ($request->has('sort') && $request->has('direction')) {
+            $query->orderBy($request->input('sort'), $request->input('direction'));
+        } else {
+            $query->latest();
+        }
+
+        $workOrder = $query->paginate(5);
         return view('work_order.index', compact('workOrder'));
     }
 
