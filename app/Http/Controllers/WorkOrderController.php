@@ -58,7 +58,8 @@ class WorkOrderController extends Controller
      */
     public function edit(WorkOrder $workOrder)
     {
-        return view('work_order.edit', compact('workOrder'));
+        $users = \App\Models\User::all();
+        return view('work_order.edit', compact('workOrder', 'users'));
     }
 
     /**
