@@ -30,7 +30,7 @@
                     <td> {{$work_order->work_order_id}}</td>
                     <td> {{$work_order->product_name}}</td>
                     <td> {{$work_order->quantity}}</td>
-                    <td> {{$work_order->production_deadline}}</td>
+                    <td> {{$work_order->production_deadline ? $work_order->production_deadline->format('Y-m-d') : '' }}</td>
                     <td> {{$work_order->status}}</td>
                     <td> {{$work_order->responsible_operato}}</td>
 

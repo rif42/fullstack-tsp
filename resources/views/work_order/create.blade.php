@@ -27,6 +27,16 @@
             </div>
         </div>
         <div class="mb-3 flex flex-row gap-4">
+            <label class="w-40">Production Deadline</label>
+            <div class="flex flex-col">
+                <input type="date" name="production_deadline" class="border-1 @error('production_deadline') border-red-500 @enderror"
+                    value="{{ old('production_deadline') }}" required min="{{ date('Y-m-d', strtotime('+1 day')) }}">
+                @error('production_deadline')
+                    <span class="text-red-500 text-sm">{{ $message }}</span>
+                @enderror
+            </div>
+        </div>
+        <div class="mb-3 flex flex-row gap-4">
             <label class="w-40" for="status">Status</label>
             <div class="flex flex-col">
                 <select name="status" id="status" class="@error('status') border-red-500 @enderror">

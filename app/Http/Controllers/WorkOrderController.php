@@ -31,16 +31,18 @@ class WorkOrderController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'product_name' => 'required',
-            'quantity' => 'required|integer',
-            'production_deadline' => 'required|date',
-            'responsible_operator' => 'required',
+        $validated = $request->validate([
+            'product_name' => 'required|string|min:3|max:255',
+            'quantity' => 'required|integer|min:1',
+            'status' => 'required|in:pending,progress,completed,canceled',
+            'production_deadline' => 'required|date|after:today',
+            'responsible_operator' => 'required|exists:users,name',
         ]);
 
-        WorkOrder::create($request->all());
+        WorkOrder::create($validated);
 
-        return redirect()->route('work_orders.index')->with('success', 'Work Order created successfully.');
+        return redirect()->route('work_orders.index')
+            ->with('success', 'Work order created successfully');
     }
 
     /**
