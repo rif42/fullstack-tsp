@@ -1,35 +1,40 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="d-flex justify-content-between mb-3">
-    <h2>Work Order List</h2>
-    <a class="btn btn-primary" href="{{ route('work_orders.create') }}">Create Work Order</a>
-</div>
+    <div class="mb-4 text-4xl">
+        <h2>Work Order List</h2>
+    </div>
 
-@if (session('success'))
-    <div class="alert alert-success">{{ session('success') }}</div>
-@endif
+    <a class="p-2 border-2 rounded-md mb-4" href="{{ route('work_orders.create') }}">Create Work Order</a>
 
-<table class="table table-bordered">
-    <tr>
-        <th>ID</th>
-        <th>Title</th>
-        <th>Action</th>
-    </tr>
-    @foreach ($workOrder as $work_order)
-    <tr>
-        <td>{{ $work_order->id }}</td>
-        <td>{{ $work_order->title }}</td>
-        <td>
-            <a class="btn btn-info btn-sm" href="{{ route('work_orders.edit', $work_order) }}">Edit</a>
-            <form action="{{ route('work_orders.destroy', $work_order) }}" method="POST" class="d-inline">
-                @csrf @method('DELETE')
-                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-            </form>
-        </td>
-    </tr>
-    @endforeach
-</table>
+    @if (session('success'))
+        <div class="mt-4">{{ session('success') }}</div>
+    @endif
 
-{{ $workOrder->links() }}
+    <table class="table-auto mt-8 w-full items-center justify-center text-left border-2">
+        <thead class="border-2">
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody class="border-2">
+            @foreach ($workOrder as $work_order)
+                <tr>
+                    <td>{{ $work_order->id }}</td>
+                    <td>{{ $work_order->title }}</td>
+                    <td class="flex flex-row gap-4 w-4">
+                        <a class="px-2 border-2" href="{{ route('work_orders.edit', $work_order) }}">Edit</a>
+                        <form action="{{ route('work_orders.destroy', $work_order) }}" method="POST">
+                            @csrf @method('DELETE')
+                            <button type="submit" class="px-2 border-2 cursor-pointer">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    {{ $workOrder->links() }}
 @endsection
