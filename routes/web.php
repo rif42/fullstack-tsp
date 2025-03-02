@@ -8,7 +8,9 @@ Route::get('/', function () {
     return view('welcome');
 })->name('home');
 
-Route::view('dashboard', 'dashboard')
+Route::get('dashboard', function () {
+    return redirect()->route('work_orders.index');
+})
     ->middleware(['auth', 'verified'])
     ->name('dashboard');
 

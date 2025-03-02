@@ -13,7 +13,8 @@
 
             <flux:navlist variant="outline">
                 <flux:navlist.group heading="Platform" class="grid">
-                    <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
+                    <!-- <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item> -->
+                    <flux:navlist.item icon="clipboard-document-list" :href="route('work_orders.index')" :current="request()->routeIs('work_orders.*')">{{ __('Work Orders') }}</flux:navlist.item>
                 </flux:navlist.group>
             </flux:navlist>
 

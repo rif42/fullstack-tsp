@@ -2,7 +2,7 @@
 
 @section('content')
     <h2>Create Work Order</h2>
-    <form action="{{ route('work_order.store') }}" method="POST">
+    <form action="{{ route('work_orders.store') }}" method="POST">
         @csrf
         <div class="mb-3">
             <label>Title</label>

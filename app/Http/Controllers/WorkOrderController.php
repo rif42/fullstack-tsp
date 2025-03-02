@@ -36,7 +36,7 @@ class WorkOrderController extends Controller
 
         WorkOrder::create($request->all());
 
-        return redirect()->route('work_order.index')->with('success', 'Work Order created successfully.');
+        return redirect()->route('work_orders.index')->with('success', 'Work Order created successfully.');
     }
 
     /**
@@ -44,7 +44,7 @@ class WorkOrderController extends Controller
      */
     public function show(WorkOrder $workOrder)
     {
-        return view('work_order.show', compact('work_order'));
+        return view('work_order.show', compact('workOrder'));
     }
 
     /**
@@ -52,7 +52,7 @@ class WorkOrderController extends Controller
      */
     public function edit(WorkOrder $workOrder)
     {
-        return view('work_order.edit', compact('work_order'));
+        return view('work_order.edit', compact('workOrder'));
     }
 
     /**
@@ -67,7 +67,7 @@ class WorkOrderController extends Controller
 
         $workOrder->update($request->all());
 
-        return redirect()->route('work_order.index')->with('success', 'Work Order updated successfully.');
+        return redirect()->route('work_orders.index')->with('success', 'Work Order updated successfully.');
     }
 
     /**
@@ -76,6 +76,6 @@ class WorkOrderController extends Controller
     public function destroy(WorkOrder $workOrder)
     {
         $workOrder->delete();
-        return redirect()->route('work_order.index')->with('success', 'Work Order deleted successfully.');
+        return redirect()->route('work_orders.index')->with('success', 'Work Order deleted successfully.');
     }
 }

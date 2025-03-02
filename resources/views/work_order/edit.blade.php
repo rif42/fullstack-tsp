@@ -2,7 +2,7 @@
 
 @section('content')
     <h2>Edit Work Order</h2>
-    <form action="{{ route('work_order.update', $workOrder) }}" method="POST">
+    <form action="{{ route('work_orders.update', $workOrder) }}" method="POST">
         @csrf @method('PUT')
         <div class="mb-3">
             <label>Title</label>
