@@ -14,16 +14,27 @@
     <table class="table-auto mt-8 w-full items-center justify-center text-left border-2">
         <thead class="border-2">
             <tr>
-                <th>ID</th>
-                <th>Title</th>
-                <th>Action</th>
+                <th>work_order_id</th>
+                <th>product_name</th>
+                <th>quantity</th>
+                <th>production_deadline</th>
+                <th>status</th>
+                <th>responsible_operator</th>
+                <th>actions</th>
             </tr>
         </thead>
         <tbody class="border-2">
             @foreach ($workOrder as $work_order)
                 <tr>
-                    <td>{{ $work_order->id }}</td>
-                    <td>{{ $work_order->title }}</td>
+                    <!-- data -->
+                    <td> {{$work_order->work_order_id}}</td>
+                    <td> {{$work_order->product_name}}</td>
+                    <td> {{$work_order->quantity}}</td>
+                    <td> {{$work_order->production_deadline}}</td>
+                    <td> {{$work_order->status}}</td>
+                    <td> {{$work_order->responsible_operato}}</td>
+
+                    <!-- actions -->
                     <td class="flex flex-row gap-4 w-4">
                         <a class="px-2 border-2" href="{{ route('work_orders.edit', $work_order) }}">Edit</a>
                         <form action="{{ route('work_orders.destroy', $work_order) }}" method="POST">

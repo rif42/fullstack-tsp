@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\WorkOrder;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class WorkOrderController extends Controller
@@ -21,7 +22,8 @@ class WorkOrderController extends Controller
      */
     public function create()
     {
-        return view('work_order.create');
+        $users = \App\Models\User::all();
+        return view('work_order.create', compact('users'));
     }
 
     /**
@@ -30,8 +32,10 @@ class WorkOrderController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
+            'product_name' => 'required',
+            'quantity' => 'required|integer',
+            'production_deadline' => 'required|date',
+            'responsible_operator' => 'required',
         ]);
 
         WorkOrder::create($request->all());
@@ -61,8 +65,10 @@ class WorkOrderController extends Controller
     public function update(Request $request, WorkOrder $workOrder)
     {
         $request->validate([
-            'title' => 'required',
-            'content' => 'required',
+            'product_name' => 'required',
+            'quantity' => 'required|integer',
+            'production_deadline' => 'required|date',
+            'responsible_operator' => 'required',
         ]);
 
         $workOrder->update($request->all());
