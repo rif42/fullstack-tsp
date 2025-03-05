@@ -79,15 +79,40 @@ class WorkOrderController extends Controller
      */
     public function update(Request $request, WorkOrder $workOrder)
     {
-        $request->validate([
-            'product_name' => 'required',
-            'quantity' => 'required|integer',
-            'production_deadline' => 'required|date',
-            'responsible_operator' => 'required',
-        ]);
+        $rules = [];
+        $validData = [];
 
-        $workOrder->update($request->all());
+        if (auth()->user()->role === 'operator') {
+            $rules = [
+                'status' => [
+                    'required',
+                    'in:progress,completed',
+                    function ($attr, $value, $fail) use ($workOrder) {
+                        $allowedTransitions = [
+                            'pending' => ['progress'],
+                            'progress' => ['completed']
+                        ];
 
+                        if (!isset($allowedTransitions[$workOrder->status]) ||
+                            !in_array($value, $allowedTransitions[$workOrder->status])) {
+                            $fail("Invalid status transition from {$workOrder->status}");
+                        }
+                    }
+                ],
+                'quantity' => 'required|integer|min:1'
+            ];
+            $validData = $request->validate($rules);
+        } else {
+            $validData = $request->validate([
+                'product_name' => 'required',
+                'quantity' => 'required|integer',
+                'production_deadline' => 'required|date',
+                'responsible_operator' => 'required',
+                'status' => 'required|in:pending,progress,completed,canceled'
+            ]);
+        }
+
+        $workOrder->update($validData);
         return redirect()->route('work_orders.index')->with('success', 'Work Order updated successfully.');
     }
 

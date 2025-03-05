@@ -38,7 +38,9 @@ class WorkOrderPolicy
      */
     public function update(User $user, WorkOrder $workOrder): bool
     {
-        return $user->role === 'admin';
+        return $user->role === 'admin' ||
+               ($user->role === 'operator' &&
+                $workOrder->responsible_operator === $user->name);
     }
 
     /**
