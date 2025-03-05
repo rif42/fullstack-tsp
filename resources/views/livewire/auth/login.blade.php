@@ -20,6 +20,13 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
     public bool $remember = false;
 
+    public string $role = 'operator';
+
+    public function mount(): void
+    {
+        $this->role = request()->input('role', 'operator');
+    }
+
     /**
      * Handle an incoming authentication request.
      */
@@ -29,7 +36,7 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
+        if (! Auth::attempt(['email' => $this->email, 'password' => $this->password, 'role' => $this->role], $this->remember)) {
             RateLimiter::hit($this->throttleKey());
 
             throw ValidationException::withMessages([
@@ -113,6 +120,9 @@ new #[Layout('components.layouts.auth')] class extends Component {
 
         <!-- Remember Me -->
         <flux:checkbox wire:model="remember" :label="__('Remember me')" />
+
+        <!-- Hidden role field -->
+        <input type="hidden" name="role" wire:model="role" />
 
         <div class="flex items-center justify-end">
             <flux:button variant="primary" type="submit" class="w-full">{{ __('Log in') }}</flux:button>
