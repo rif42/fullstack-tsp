@@ -21,7 +21,8 @@ class WorkOrderPolicy
      */
     public function view(User $user, WorkOrder $workOrder): bool
     {
-        return false;
+        return $user->role === 'admin' ||
+               ($user->role === 'operator' && $workOrder->responsible_operator === $user->name);
     }
 
     /**

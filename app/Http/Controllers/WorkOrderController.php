@@ -15,6 +15,10 @@ class WorkOrderController extends Controller
     {
         $query = WorkOrder::query();
 
+        if (auth()->user()->role === 'operator') {
+            $query->where('responsible_operator', auth()->user()->name);
+        }
+
         if ($request->has('sort') && $request->has('direction')) {
             $query->orderBy($request->input('sort'), $request->input('direction'));
         } else {
