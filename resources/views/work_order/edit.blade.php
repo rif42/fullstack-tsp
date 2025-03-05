@@ -58,9 +58,11 @@
                 <select name="responsible_operator" id="responsible_operator"
                     class="@error('responsible_operator') border-red-500 @enderror">
                     @foreach($users as $user)
-                        <option value="{{ $user->name }}" {{ old('responsible_operator', $workOrder->responsible_operator) == $user->name ? 'selected' : '' }}>
-                            {{ $user->name }}
-                        </option>
+                        @if ($user->role == 'operator')
+                            <option value="{{ $user->name }}" {{ old('responsible_operator') == $user->name ? 'selected' : '' }}>
+                                {{ $user->name }}
+                            </option>
+                        @endif
                     @endforeach
                 </select>
                 @error('responsible_operator')

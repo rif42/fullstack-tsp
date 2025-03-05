@@ -29,7 +29,8 @@
         <div class="mb-3 flex flex-row gap-4">
             <label class="w-40">Production Deadline</label>
             <div class="flex flex-col">
-                <input type="date" name="production_deadline" class="border-1 @error('production_deadline') border-red-500 @enderror"
+                <input type="date" name="production_deadline"
+                    class="border-1 @error('production_deadline') border-red-500 @enderror"
                     value="{{ old('production_deadline') }}" required min="{{ date('Y-m-d', strtotime('+1 day')) }}">
                 @error('production_deadline')
                     <span class="text-red-500 text-sm">{{ $message }}</span>
@@ -56,9 +57,11 @@
                 <select name="responsible_operator" id="responsible_operator"
                     class="@error('responsible_operator') border-red-500 @enderror">
                     @foreach($users as $user)
-                        <option value="{{ $user->name }}" {{ old('responsible_operator') == $user->name ? 'selected' : '' }}>
-                            {{ $user->name }}
-                        </option>
+                        @if ($user->role == 'operator')
+                            <option value="{{ $user->name }}" {{ old('responsible_operator') == $user->name ? 'selected' : '' }}>
+                                {{ $user->name }}
+                            </option>
+                        @endif
                     @endforeach
                 </select>
                 @error('responsible_operator')
