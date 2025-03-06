@@ -63,14 +63,13 @@
                     <p>but learning more js makes me love php</p>
                     <p>i actually like C# more</p>
                     <p>but alas, i dont have enough braincells</p>
-                    <p>nor server credits</p>
                     <br/>
                     <p>im sorry php</p>
                     <p>i was very wrong</p>
 
                 </div>
                 <div class="bg-[#fff2f2] dark:bg-[#1D0002] relative lg:-ml-px -mb-px lg:mb-0 rounded-t-lg lg:rounded-t-none lg:rounded-r-lg aspect-[335/376] lg:aspect-auto w-full lg:w-[438px] shrink-0 overflow-hidden">
-                    <img src="https://media.discordapp.net/attachments/922536453731418153/1346937591466819745/IMG-20240623-WA0059.jpg?ex=67ca00e2&is=67c8af62&hm=4a628e61c8e43900104acf521ae14311605ae3f6d7804ea105d4ba93c89bd5c5&=&format=webp&width=876&height=1168"/>
+                    <img src='/pic/rif.jpg'/>
                 </div>
             </main>
         </div>
